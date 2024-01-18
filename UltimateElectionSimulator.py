@@ -1,7 +1,7 @@
 #
 # Ultimate Election Simulator
 # by EuroNutella
-# last updated: 15/01/2024
+# last updated: 18/01/2024
 #
 import os
 import random
@@ -50,25 +50,25 @@ def turnout():
     global maxTurn
     minTurn = int(input('Minimum turnout: '))
     maxTurn = int(input('Maximum turnout: '))
-    print(GREEN+'Minimum turnout set to '+str(minTurn))
-    print('Maximum turnout set to '+str(maxTurn)+RESET)
+    print(f"{GREEN}Minimum turnout set to {minTurn}")
+    print(f"Maximum turnout set to {maxTurn}{RESET}")
 
 # Functions to display the results
 def display_1(votes):
     for i in range(len(parties)):
-        print(BLUE,parties[i],':',votes[i],'%',RESET)
-    print(BLUE,'Turnout:',random.randint(minTurn,maxTurn),'%',RESET)
+        print(f"{BLUE}{parties[i]}: {votes[i]}%{RESET}")
+    print(f"{BLUE}Turnout: {random.randint(minTurn,maxTurn)}%{RESET}")
 
 def display_2(percentages, passed_percents, seat_number):
     for i in range(len(parties)):
         passed_percent = passed_percents[i]*100/sum(passed_percents)
-        print(BLUE,parties[i],'Percentage:',percentages[i],'%','Seats:',round(seat_number*passed_percent/100, 0),RESET)
-    print(BLUE,'Turnout:',random.randint(minTurn,maxTurn),'%',RESET)
+        print(f"{BLUE}{parties[i]} percentage: {percentages[i]}% | Seats: {round(seat_number*passed_percent/100, 0)}{RESET}")
+    print(f"{BLUE}Turnout: {random.randint(minTurn,maxTurn)}%{RESET}")
 
 
 # Random percentages mode
 def r_vote():
-    print(GREEN + 'You have selected random percentages' + RESET)
+    print(f"{GREEN}You have selected random percentages{RESET}")
     turnout()
     percentages = []
     tot_percent = 0
@@ -83,7 +83,7 @@ def r_vote():
 
 # Adjusted percentages mode
 def a_vote():
-    print(GREEN + 'You have selected adjusted percentages' + RESET)
+    print(f"{GREEN}You have selected adjusted percentages{RESET}")
     turnout()
     votes = [] # This one stores the votes to modify
     percentages = [0] *max_parties
@@ -99,7 +99,7 @@ def a_vote():
 
 # Population votes (random turnout) mode
 def v_vote():
-    print(GREEN + 'You have selected population votes (random turnout)' + RESET)
+    print(f"{GREEN}You have selected population votes (random turnout){RESET}")
     turnout()
     votes = []
     total_votes = 0 # Makes sure to track how many people have voted so far
@@ -112,12 +112,12 @@ def v_vote():
     votes.append(max_pop - total_votes) # Adds the remaining votes to the last party
     random.shuffle(votes) # Shuffles votes to ensure random results without influence from order
     for i in range(len(parties)): # Prints results
-        print(BLUE,parties[i] + ': ' + str(round(votes[i]/max_pop*100, 2)) + '%','Number of votes:',votes[i],RESET)
-    print(BLUE,'Turnout:',random.randint(minTurn,maxTurn),'%',RESET)
+        print(f"{BLUE}{parties[i]}: {round(votes[i]/max_pop*100, 2)}% | Number of votes: {votes[i]}{RESET}")
+    print(f"{BLUE}Turnout: {random.randint(minTurn,maxTurn)}%{RESET}")
 
 # Population votes (true turnout) mode
 def t_vote():
-    print(GREEN + 'You have selected population votes (true turnout)' + RESET)
+    print(f"{GREEN}You have selected population votes (true turnout){RESET}")
     votes = []
     total_votes = 0 # Same as previous mode but also helps with calculating result and track turnout
     max_pop = int(input('What is the population? '))
@@ -128,12 +128,12 @@ def t_vote():
         votes.append(vote)
     random.shuffle(votes)
     for i in range(len(parties)): # Calculates and prints out results
-        print(BLUE,parties[i] + ': ' + str(round(votes[i]/total_votes*100, 2)) + '%','Number of votes:',votes[i],RESET)
-    print(BLUE,'Turnout: ' + str(round(total_votes/max_pop*100, 2)) + '%','Total number of votes:',total_votes,RESET)
+        print(f"{BLUE}{parties[i]}: {round(votes[i]/total_votes*100, 2)}% | Number of votes: {votes[i]}{RESET}")
+    print(f"{BLUE}Turnout: {round(total_votes/max_pop*100, 2)}% | Total number of votes: {total_votes}{RESET}")
 
 # Random + threshold mode
 def rt_vote():
-    print(GREEN + 'You have selected random percentages' + RESET)
+    print(f"{GREEN}You have selected random percentages{RESET}")
     turnout()
     percentages = []
     tot_percent = 0
@@ -157,7 +157,7 @@ def rt_vote():
 
 # Adjusted + threshold mode
 def at_vote():
-    print(GREEN + 'You have selected adjusted percentages + threshold' + RESET)
+    print(f"{GREEN}You have selected adjusted percentages + threshold{RESET}")
     turnout()
     votes = []
     percentages = [0] *max_parties
@@ -182,7 +182,7 @@ def at_vote():
 
 # Approval influenced mode
 def i_vote():
-    print(GREEN + 'You have selected approval influenced' + RESET)
+    print(f"{GREEN}You have selected approval influenced{RESET}")
     turnout()
     GovParties = []
     votes = []
@@ -217,15 +217,15 @@ def restart():
     if running == 'y' or running == 'n':
         return running
     else:
-        print(RED + 'Invalid input, try again!' + RESET)
+        print(f"{RED}Invalid input, try again!{RESET}")
         restart()
 
 # Display modes for the user to select
-print(YELLOW + 'r = random percentages')
+print(f"{YELLOW}r = random percentages")
 print('a = adjusted percentages')
 print('v = population votes (random turnout)')
 print('t = population votes (true turnout)')
-print('i = approval influenced' + RESET)
+print(f"i = approval influenced{RESET}")
 
 running = 'y' # Necessary to run things multiple times
 
@@ -256,7 +256,7 @@ while running == 'y':
         i_vote()
         running = restart()
     else:
-        print(RED + 'Invalid input!' + RESET)
+        print(f"{RED}Invalid input!{RESET}")
         running = restart()
 
-print(GREEN+'Finished! Goodbye!'+RESET)
+print(f"{GREEN}Finished! Goodbye!{RESET}")
