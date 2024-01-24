@@ -213,11 +213,11 @@ def i_vote():
 
 # Asks user if it wants to restart
 def restart():
-    running = input('Do you want to restart? (y/n) ')
+    running = input('Do you want to restart? (y/n) ').lower()
     if running == 'y' or running == 'n':
         return running
     else:
-        print(f"{RED}Invalid input, try again!{RESET}")
+        print(f"{RED}Invalid input {running}, try again!{RESET}")
         restart()
 
 # Display modes for the user to select
@@ -231,16 +231,16 @@ running = 'y' # Necessary to run things multiple times
 
 # Allows user to choose a mode as long as running is 'y'
 while running == 'y':
-    res = input('Choose your mode: ')
+    res = input('Choose your mode: ').lower()
     if res == 'r':
-        trs = input('Do you want to put an electoral threshold? (y/n) ')
+        trs = input('Do you want to put an electoral threshold? (y/N) ').lower()
         if trs == 'y':
             rt_vote()
         else:
             r_vote()
         running = restart()
     elif res == 'a':
-        trs = input('Do you want to put an electoral threshold? (y/n) ')
+        trs = input('Do you want to put an electoral threshold? (y/N) ').lower()
         if trs == 'y':
             at_vote()
         else:
@@ -256,7 +256,7 @@ while running == 'y':
         i_vote()
         running = restart()
     else:
-        print(f"{RED}Invalid input!{RESET}")
+        print(f"{RED}Invalid input {res}!{RESET}")
         running = restart()
 
 print(f"{GREEN}Finished! Goodbye!{RESET}")
