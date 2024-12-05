@@ -1,6 +1,6 @@
 # Ultimate Election Simulator
 
-This is a CLI tool designed to help you generate random percentages for as many parties as you want. It can be used via the internet or installed locally for offline use.
+This is a CLI tool designed to help you generate random percentages for as many parties as you want. It can be used via the internet or installed locally for offline use. The repository has been moved to [codeberg](https://codeberg.org/EuroNutellaMan/UltimateElectionSimulator)
 
 ## Requirements
 
